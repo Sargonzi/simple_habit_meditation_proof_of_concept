@@ -27,11 +27,12 @@ public class TwoAdapter extends RecyclerView.Adapter<TwoViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull TwoViewHolder holder, int position) {
-
     }
 
     @Override
     public int getItemCount() {
         return 4;
     }
+
+
 }

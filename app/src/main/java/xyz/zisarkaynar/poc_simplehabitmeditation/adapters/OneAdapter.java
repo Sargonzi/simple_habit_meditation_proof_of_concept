@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.zip.Inflater;
-
 import xyz.zisarkaynar.poc_simplehabitmeditation.R;
 import xyz.zisarkaynar.poc_simplehabitmeditation.viewholders.OneViewHolder;
 
