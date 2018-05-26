@@ -9,4 +9,9 @@
     <color name="full_white">#ffffff</color>
     <color name="full_black">#000000</color>
     <color name="text_secondary">#cecece</color>
+
+    <color name="me_1">#7e57c2</color>
+    <color name="me_2">#2e7d32</color>
+    <color name="me_3">#536dfe</color>
+    <color name="card_pink">#f8bbd0</color>
 </resources>

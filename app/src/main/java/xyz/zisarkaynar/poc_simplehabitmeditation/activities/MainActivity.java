@@ -1,5 +1,7 @@
 package xyz.zisarkaynar.poc_simplehabitmeditation.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -19,7 +21,7 @@ import xyz.zisarkaynar.poc_simplehabitmeditation.fragments.SeriesFragment;
 import xyz.zisarkaynar.poc_simplehabitmeditation.fragments.TeachersFragment;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -33,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
 
     private PageAdapter mPageAdapter;
 
+    public static Intent newIntent(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -42,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     return true;
                 case R.id.navigation_dashboard:
+                    navigateToMe();
                     return true;
                 case R.id.navigation_notifications:
                     return true;
@@ -77,7 +85,11 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setOffscreenPageLimit(mPageAdapter.getCount());
         tabLayout.setupWithViewPager(viewPager);
 
+    }
 
+    public void navigateToMe() {
+        Intent intent = MeActivity.newIntent(this);
+        startActivity(intent);
     }
 
 }
