@@ -4,6 +4,7 @@ import java.util.List;
 
 import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.CategoriesProgramVO;
 import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.CurrentProgramVO;
+import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.MainScreenVO;
 import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.TopicVO;
 
 public class SHMEvent {
@@ -32,15 +33,27 @@ public class SHMEvent {
         }
     }
 
-    public static class CurrentProgramLoadedEvnet {
-        private List<CurrentProgramVO> currentProgramVOS;
+    public static class CurrentProgramLoadedEvent {
+        private CurrentProgramVO currentProgramVOS;
 
-        public CurrentProgramLoadedEvnet(List<CurrentProgramVO> currentProgramVOS) {
+        public CurrentProgramLoadedEvent(CurrentProgramVO currentProgramVOS) {
             this.currentProgramVOS = currentProgramVOS;
         }
 
-        public List<CurrentProgramVO> getCurrentProgramVOS() {
+        public CurrentProgramVO getCurrentProgramVOS() {
             return currentProgramVOS;
+        }
+    }
+
+    public static class MainScreenLoadedEvent {
+        private List<MainScreenVO> mainScreenVOS;
+
+        public MainScreenLoadedEvent(List<MainScreenVO> mainScreenVOS) {
+            this.mainScreenVOS = mainScreenVOS;
+        }
+
+        public List<MainScreenVO> getMainScreenVOS() {
+            return mainScreenVOS;
         }
     }
 

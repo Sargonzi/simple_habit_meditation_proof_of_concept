@@ -29,7 +29,7 @@
     </android.support.v7.widget.CardView>
 
     <TextView
-        android:id="@+id/tvDesc"
+        android:id="@+id/tvProTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/cardView"
@@ -41,7 +41,7 @@
         android:id="@+id/tvTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvDesc"
+        android:layout_below="@id/tvProTitle"
         android:text="@string/time_5mins"
         android:textColor="@color/text_secondary" />
 

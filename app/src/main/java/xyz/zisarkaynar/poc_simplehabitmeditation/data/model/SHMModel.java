@@ -7,25 +7,21 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.CategoriesProgramVO;
-import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.CurrentProgramVO;
-import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.TopicVO;
+import xyz.zisarkaynar.poc_simplehabitmeditation.adapters.MeditateScreenAdapter;
+import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.MainScreenVO;
 import xyz.zisarkaynar.poc_simplehabitmeditation.events.SHMEvent;
 import xyz.zisarkaynar.poc_simplehabitmeditation.network.SimpleHabitDataAgentImpl;
 import xyz.zisarkaynar.poc_simplehabitmeditation.utils.SHMConstants;
 
 public class SHMModel {
-    public static SHMModel sObjectInstance;
-    private List<TopicVO> topicVOS;
-    private List<CurrentProgramVO> currentProgramVOS;
-    private List<CategoriesProgramVO> categoriesProgramVOS;
 
+    public static SHMModel sObjectInstance;
+    private List<MainScreenVO> mainScreenVOS;
+    private MeditateScreenAdapter meditateScreenAdapter;
 
     private SHMModel() {
         EventBus.getDefault().register(this);
-        topicVOS = new ArrayList<>();
-        currentProgramVOS = new ArrayList<>();
-        categoriesProgramVOS = new ArrayList<>();
+        mainScreenVOS = new ArrayList<>();
     }
 
     public static SHMModel getInstance() {
@@ -35,43 +31,32 @@ public class SHMModel {
         return sObjectInstance;
     }
 
-    public List<TopicVO> getTopicVOS() {
-        return topicVOS;
+    public List<MainScreenVO> getMainScreenVOS() {
+        return mainScreenVOS;
     }
 
-
-    public List<CurrentProgramVO> getCurrentProgramVOS() {
-        return currentProgramVOS;
-    }
-
-    public List<CategoriesProgramVO> getCategoriesProgramVOS() {
-        return categoriesProgramVOS;
-    }
-
-    public void loadTopics() {
-        SimpleHabitDataAgentImpl.getInstance().loadTopics(SHMConstants.PAGE, SHMConstants.ACCESS_TOKEN);
-    }
-
-    public void loadCurrentProgram() {
+    public void loadData() {
         SimpleHabitDataAgentImpl.getInstance().loadCurrentProgram(SHMConstants.PAGE, SHMConstants.ACCESS_TOKEN);
     }
 
-    public void loadCategoriesProgram() {
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void onCurrentProgramLoaded(SHMEvent.CurrentProgramLoadedEvent event) {
+        mainScreenVOS.add(event.getCurrentProgramVOS());
         SimpleHabitDataAgentImpl.getInstance().loadCategoriesProgram(SHMConstants.PAGE, SHMConstants.ACCESS_TOKEN);
     }
 
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
-    public void onTopicsLoaded(SHMEvent.TopicsLoadedEvent event) {
-        topicVOS.addAll(event.getTopics());
-    }
-
-    @Subscribe(threadMode = ThreadMode.BACKGROUND)
-    public void onCurrentProgramLoaded(SHMEvent.CurrentProgramLoadedEvnet evnet) {
-        currentProgramVOS.addAll(evnet.getCurrentProgramVOS());
-    }
-
-    @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void onCategoriesProgramLoaded(SHMEvent.CategoriesLoadedEvent event) {
-        categoriesProgramVOS.addAll(event.getCategoriesProgramVOS());
+        mainScreenVOS.addAll(event.getCategoriesProgramVOS());
+        SimpleHabitDataAgentImpl.getInstance().loadTopics(SHMConstants.PAGE, SHMConstants.ACCESS_TOKEN);
     }
+
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void onTopicsLoaded(SHMEvent.TopicsLoadedEvent event) {
+        mainScreenVOS.addAll(event.getTopics());
+        SHMEvent.MainScreenLoadedEvent mainEvent = new SHMEvent.MainScreenLoadedEvent(mainScreenVOS);
+        EventBus.getDefault().post(mainEvent);
+    }
+
+
 }

@@ -7,15 +7,21 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.zisarkaynar.poc_simplehabitmeditation.R;
+import xyz.zisarkaynar.poc_simplehabitmeditation.adapters.MeditateScreenAdapter;
 import xyz.zisarkaynar.poc_simplehabitmeditation.adapters.PageAdapter;
+import xyz.zisarkaynar.poc_simplehabitmeditation.events.SHMEvent;
 import xyz.zisarkaynar.poc_simplehabitmeditation.fragments.OnTheGoFragment;
 import xyz.zisarkaynar.poc_simplehabitmeditation.fragments.SeriesFragment;
 import xyz.zisarkaynar.poc_simplehabitmeditation.fragments.TeachersFragment;
@@ -32,8 +38,8 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.tl_tablayout)
     TabLayout tabLayout;
 
-
     private PageAdapter mPageAdapter;
+    private MeditateScreenAdapter mMeditateScreenAdapter;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -75,7 +81,6 @@ public class MainActivity extends BaseActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-
         mPageAdapter = new PageAdapter(getSupportFragmentManager());
         mPageAdapter.addTab(OnTheGoFragment.newInstance(), "ON THE GO");
         mPageAdapter.addTab(SeriesFragment.newInstance(), "SERIES");
@@ -91,5 +96,6 @@ public class MainActivity extends BaseActivity {
         Intent intent = MeActivity.newIntent(this);
         startActivity(intent);
     }
+
 
 }

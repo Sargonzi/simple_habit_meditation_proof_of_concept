@@ -61,13 +61,17 @@ public class SimpleHabitDataAgentImpl implements SimpleHabitDataAgent {
             @Override
             public void onResponse(Call<TopicsResponse> call, Response<TopicsResponse> response) {
                 TopicsResponse topicsResponse = response.body();
-                List<TopicVO> topicVOList = topicsResponse.getTopics();
-                SHMEvent.TopicsLoadedEvent event = new SHMEvent.TopicsLoadedEvent(topicVOList);
-                EventBus.getDefault().post(event);
+                if (topicsResponse != null && topicsResponse.getTopics().size() > 0) {
+                    List<TopicVO> topicVOList = topicsResponse.getTopics();
+                    SHMEvent.TopicsLoadedEvent event = new SHMEvent.TopicsLoadedEvent(topicVOList);
+                    EventBus.getDefault().post(event);
+                }
             }
 
             @Override
             public void onFailure(Call<TopicsResponse> call, Throwable t) {
+                SHMEvent.ErrorInvokingAPIEvent event = new SHMEvent.ErrorInvokingAPIEvent(t.getMessage());
+                EventBus.getDefault().post(event);
 
             }
         });
@@ -81,13 +85,17 @@ public class SimpleHabitDataAgentImpl implements SimpleHabitDataAgent {
             @Override
             public void onResponse(Call<CurrentProgramResponse> call, Response<CurrentProgramResponse> response) {
                 CurrentProgramResponse currentProgramResponse = response.body();
-                List<CurrentProgramVO> currentProgramVOS = currentProgramResponse.getCurrentProgramVOS();
-                SHMEvent.CurrentProgramLoadedEvnet event = new SHMEvent.CurrentProgramLoadedEvnet(currentProgramVOS);
+
+                CurrentProgramVO currentProgramVOS = currentProgramResponse.getCurrentProgramVOS();
+                SHMEvent.CurrentProgramLoadedEvent event = new SHMEvent.CurrentProgramLoadedEvent(currentProgramVOS);
                 EventBus.getDefault().post(event);
+
             }
 
             @Override
             public void onFailure(Call<CurrentProgramResponse> call, Throwable t) {
+                SHMEvent.ErrorInvokingAPIEvent event = new SHMEvent.ErrorInvokingAPIEvent(t.getMessage());
+                EventBus.getDefault().post(event);
 
             }
         });
@@ -100,13 +108,17 @@ public class SimpleHabitDataAgentImpl implements SimpleHabitDataAgent {
             @Override
             public void onResponse(Call<CategoriesProgramResponse> call, Response<CategoriesProgramResponse> response) {
                 CategoriesProgramResponse categoriesProgramResponse = response.body();
-                List<CategoriesProgramVO> categoriesProgramVOS = categoriesProgramResponse.getCategoriesProgramVOS();
-                SHMEvent.CategoriesLoadedEvent event = new SHMEvent.CategoriesLoadedEvent(categoriesProgramVOS);
-                EventBus.getDefault().post(event);
+                if (categoriesProgramResponse != null && categoriesProgramResponse.getCategoriesProgramVOS().size() > 0) {
+                    List<CategoriesProgramVO> categoriesProgramVOS = categoriesProgramResponse.getCategoriesProgramVOS();
+                    SHMEvent.CategoriesLoadedEvent event = new SHMEvent.CategoriesLoadedEvent(categoriesProgramVOS);
+                    EventBus.getDefault().post(event);
+                }
             }
 
             @Override
             public void onFailure(Call<CategoriesProgramResponse> call, Throwable t) {
+                SHMEvent.ErrorInvokingAPIEvent event = new SHMEvent.ErrorInvokingAPIEvent(t.getMessage());
+                EventBus.getDefault().post(event);
 
             }
         });

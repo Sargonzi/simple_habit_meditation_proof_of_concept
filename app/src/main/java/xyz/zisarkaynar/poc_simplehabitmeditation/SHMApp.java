@@ -8,8 +8,6 @@ public class SHMApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SHMModel.getInstance().loadTopics();
-        SHMModel.getInstance().loadCategoriesProgram();
-        SHMModel.getInstance().loadCurrentProgram();
+        SHMModel.getInstance().loadData();
     }
 }

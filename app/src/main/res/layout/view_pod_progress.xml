@@ -36,7 +36,7 @@
         android:layout_below="@id/llayout_user"
         android:text="Progress"
         android:textColor="@color/text_secondary"
-        android:textSize="@dimen/text_regular_3x" />
+        android:textSize="@dimen/text_regular_2x" />
 
     <LinearLayout
         android:id="@+id/linear_score"

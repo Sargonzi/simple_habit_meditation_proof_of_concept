@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class SessionsVO {
     @SerializedName("session-id")
-    private String sessiongId;
+    private String sessionId;
 
     @SerializedName("title")
     private String title;
@@ -15,8 +15,8 @@ public class SessionsVO {
     @SerializedName("file-path")
     private String filePath;
 
-    public String getSessiongId() {
-        return sessiongId;
+    public String getSessionId() {
+        return sessionId;
     }
 
     public String getTitle() {

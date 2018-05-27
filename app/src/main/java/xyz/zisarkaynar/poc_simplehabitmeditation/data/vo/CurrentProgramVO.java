@@ -4,7 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class CurrentProgramVO {
+import xyz.zisarkaynar.poc_simplehabitmeditation.viewholders.BaseViewHolder;
+
+public class CurrentProgramVO implements MainScreenVO{
 
     @SerializedName("program-id")
     private String programId;

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvHead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="@string/start_here"
+        android:textColor="@color/full_white"
+        android:textSize="@dimen/text_regular_3x" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvCurrent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvHead" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rvCurrent" />
+
+    <TextView
+        android:id="@+id/tvFive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rvCategory"
+        android:layout_marginBottom="@dimen/margin_medium_2"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium_3"
+        android:text="@string/all_topic"
+        android:textColor="@color/full_white"
+        android:textSize="@dimen/text_regular_3x" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvFive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvFive" />
+</RelativeLayout>

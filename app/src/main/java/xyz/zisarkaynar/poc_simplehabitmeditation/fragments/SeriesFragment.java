@@ -10,32 +10,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.zisarkaynar.poc_simplehabitmeditation.R;
-import xyz.zisarkaynar.poc_simplehabitmeditation.adapters.OneAdapter;
-import xyz.zisarkaynar.poc_simplehabitmeditation.adapters.TwoAdapter;
+import xyz.zisarkaynar.poc_simplehabitmeditation.adapters.MeditateScreenAdapter;
+import xyz.zisarkaynar.poc_simplehabitmeditation.adapters.ProgramsAdapter;
+import xyz.zisarkaynar.poc_simplehabitmeditation.adapters.TopicsAdapter;
+import xyz.zisarkaynar.poc_simplehabitmeditation.events.SHMEvent;
 
 public class SeriesFragment extends Fragment {
 
-    @BindView(R.id.rvOne)
-    RecyclerView mRecyclerViewOne;
+    @BindView(R.id.rvMain)
+    RecyclerView rvMain;
 
-    @BindView(R.id.rvTwo)
-    RecyclerView mRecyclerViewTwo;
-
-    @BindView(R.id.rvThree)
-    RecyclerView mRecyclerViewThree;
-
-    @BindView(R.id.rvFour)
-    RecyclerView mRecyclerViewFour;
-
-    @BindView(R.id.rvFive)
-    RecyclerView mRecyclerViewFive;
-
-    private OneAdapter mOneAdapter;
-    private TwoAdapter mTwoAdapter;
+    private MeditateScreenAdapter meditateScreenAdapter;
 
     private void SeriesFragment() {
     }
@@ -50,29 +44,31 @@ public class SeriesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_series, container, false);
         ButterKnife.bind(this, view);
-
-        mOneAdapter = new OneAdapter(getContext());
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerViewOne.setAdapter(mOneAdapter);
-        mRecyclerViewOne.setLayoutManager(linearLayoutManager1);
-
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerViewTwo.setAdapter(mOneAdapter);
-        mRecyclerViewTwo.setLayoutManager(linearLayoutManager2);
-
-        LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerViewThree.setAdapter(mOneAdapter);
-        mRecyclerViewThree.setLayoutManager(linearLayoutManager3);
-
-        LinearLayoutManager linearLayoutManager4 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerViewFour.setAdapter(mOneAdapter);
-        mRecyclerViewFour.setLayoutManager(linearLayoutManager4);
-
-        mTwoAdapter = new TwoAdapter(getContext());
-        LinearLayoutManager linearLayoutManager5 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        mRecyclerViewFive.setAdapter(mTwoAdapter);
-        mRecyclerViewFive.setLayoutManager(linearLayoutManager5);
-
+        rvMain.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        meditateScreenAdapter = new MeditateScreenAdapter(getContext());
+        rvMain.setAdapter(meditateScreenAdapter);
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMainScreenLoaded(SHMEvent.MainScreenLoadedEvent event) {
+        meditateScreenAdapter.setNewData(event.getMainScreenVOS());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onErrorInvoked(SHMEvent.ErrorInvokingAPIEvent event) {
+        Toast.makeText(getContext(), event.getErrorMsg(), Toast.LENGTH_LONG).show();
     }
 }

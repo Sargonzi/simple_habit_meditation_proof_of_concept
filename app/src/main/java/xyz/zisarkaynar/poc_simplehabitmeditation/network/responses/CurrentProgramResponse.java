@@ -18,7 +18,7 @@ public class CurrentProgramResponse {
     private String apiVersion;
 
     @SerializedName("currentProgram")
-    private List<CurrentProgramVO> currentProgramVOS;
+    private CurrentProgramVO currentProgramVOS;
 
     public int getCode() {
         return code;
@@ -32,7 +32,7 @@ public class CurrentProgramResponse {
         return apiVersion;
     }
 
-    public List<CurrentProgramVO> getCurrentProgramVOS() {
+    public CurrentProgramVO getCurrentProgramVOS() {
         return currentProgramVOS;
     }
 }

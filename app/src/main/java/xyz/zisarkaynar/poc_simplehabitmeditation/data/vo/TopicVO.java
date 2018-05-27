@@ -2,7 +2,7 @@ package xyz.zisarkaynar.poc_simplehabitmeditation.data.vo;
 
 import com.google.gson.annotations.SerializedName;
 
-public class TopicVO {
+public class TopicVO implements MainScreenVO {
 
     @SerializedName("topic-name")
     private String topicName;
