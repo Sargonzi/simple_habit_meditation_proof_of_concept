@@ -23,7 +23,6 @@ public class ProgramsAdapter extends BaseRecyclerAdapter<ProgramsViewHolder, Pro
     public ProgramsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mLayoutInflator.inflate(R.layout.item_view_program, parent, false);
         return new ProgramsViewHolder(view);
-
     }
 
     @Override

@@ -7,12 +7,12 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PageAdapter extends FragmentStatePagerAdapter {
+public class PagerAdapter extends FragmentStatePagerAdapter {
 
     private List<String> mTabtitles;
     private List<Fragment> mFragments;
 
-    public PageAdapter(FragmentManager fm) {
+    public PagerAdapter(FragmentManager fm) {
         super(fm);
         mTabtitles = new ArrayList<>();
         mFragments = new ArrayList<>();

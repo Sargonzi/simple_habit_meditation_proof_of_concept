@@ -5,7 +5,6 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import xyz.zisarkaynar.poc_simplehabitmeditation.R;
-import xyz.zisarkaynar.poc_simplehabitmeditation.adapters.CurrentProgramAdapter;
 import xyz.zisarkaynar.poc_simplehabitmeditation.adapters.MeditateScreenAdapter;
 import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.CurrentProgramVO;
 

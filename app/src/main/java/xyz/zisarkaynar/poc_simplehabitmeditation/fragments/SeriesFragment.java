@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
@@ -20,8 +19,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.zisarkaynar.poc_simplehabitmeditation.R;
 import xyz.zisarkaynar.poc_simplehabitmeditation.adapters.MeditateScreenAdapter;
-import xyz.zisarkaynar.poc_simplehabitmeditation.adapters.ProgramsAdapter;
-import xyz.zisarkaynar.poc_simplehabitmeditation.adapters.TopicsAdapter;
 import xyz.zisarkaynar.poc_simplehabitmeditation.events.SHMEvent;
 
 public class SeriesFragment extends Fragment {
