@@ -1,5 +1,6 @@
 package xyz.zisarkaynar.poc_simplehabitmeditation.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,10 +19,13 @@ import org.greenrobot.eventbus.ThreadMode;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.zisarkaynar.poc_simplehabitmeditation.R;
+import xyz.zisarkaynar.poc_simplehabitmeditation.activities.DetailActivity;
 import xyz.zisarkaynar.poc_simplehabitmeditation.adapters.MeditateScreenAdapter;
+import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.MainScreenVO;
+import xyz.zisarkaynar.poc_simplehabitmeditation.delegates.SHMdelegate;
 import xyz.zisarkaynar.poc_simplehabitmeditation.events.SHMEvent;
 
-public class SeriesFragment extends Fragment {
+public class SeriesFragment extends Fragment implements SHMdelegate {
 
     @BindView(R.id.rvMain)
     RecyclerView rvMain;
@@ -42,7 +46,7 @@ public class SeriesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_series, container, false);
         ButterKnife.bind(this, view);
         rvMain.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        meditateScreenAdapter = new MeditateScreenAdapter(getContext());
+        meditateScreenAdapter = new MeditateScreenAdapter(getContext(), this);
         rvMain.setAdapter(meditateScreenAdapter);
         return view;
     }
@@ -67,5 +71,11 @@ public class SeriesFragment extends Fragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onErrorInvoked(SHMEvent.ErrorInvokingAPIEvent event) {
         Toast.makeText(getContext(), event.getErrorMsg(), Toast.LENGTH_LONG).show();
+    }
+
+
+    @Override
+    public void onTapItemView() {
+
     }
 }

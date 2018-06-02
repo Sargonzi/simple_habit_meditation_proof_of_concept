@@ -3,9 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_search_24dp"
-        app:showAsAction="always"
-        android:title="search" />
+        android:id="@+id/navigation_add"
+        android:icon="@drawable/ic_add_24dp"
+        android:orderInCategory="100"
+        android:title="add"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/navigation_share"
+        android:icon="@drawable/ic_share_24dp"
+        android:orderInCategory="110"
+        android:title="share"
+        app:showAsAction="always" />
 
 </menu>

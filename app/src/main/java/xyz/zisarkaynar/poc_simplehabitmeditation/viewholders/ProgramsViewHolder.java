@@ -22,6 +22,7 @@ public class ProgramsViewHolder extends BaseViewHolder<ProgramVO, MeditateScreen
 
     @Override
     public void setData(ProgramVO data) {
+        mData = (ProgramVO) data;
         tvProTitle.setText(data.getTitle());
         tvTime.setText(data.getAverageLengths().toString() + "mins");
     }

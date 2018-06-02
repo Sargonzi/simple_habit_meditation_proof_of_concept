@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.zisarkaynar.poc_simplehabitmeditation.adapters.MeditateScreenAdapter;
+import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.CategoriesProgramVO;
+import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.CurrentProgramVO;
 import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.MainScreenVO;
+import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.TopicVO;
 import xyz.zisarkaynar.poc_simplehabitmeditation.events.SHMEvent;
 import xyz.zisarkaynar.poc_simplehabitmeditation.network.SimpleHabitDataAgentImpl;
 import xyz.zisarkaynar.poc_simplehabitmeditation.utils.SHMConstants;
@@ -17,7 +20,6 @@ public class SHMModel {
 
     public static SHMModel sObjectInstance;
     private List<MainScreenVO> mainScreenVOS;
-    private MeditateScreenAdapter meditateScreenAdapter;
 
     private SHMModel() {
         EventBus.getDefault().register(this);
@@ -58,5 +60,12 @@ public class SHMModel {
         EventBus.getDefault().post(mainEvent);
     }
 
+    public CurrentProgramVO getCurrentProgram() {
+        for (MainScreenVO mainScreen : mainScreenVOS) {
+            if (mainScreen instanceof CurrentProgramVO)
+                return (CurrentProgramVO) mainScreen;
+        }
+        return null;
+    }
 
 }

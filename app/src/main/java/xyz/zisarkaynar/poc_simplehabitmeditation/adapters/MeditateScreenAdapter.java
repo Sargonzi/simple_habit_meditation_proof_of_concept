@@ -10,6 +10,7 @@ import xyz.zisarkaynar.poc_simplehabitmeditation.R;
 import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.CategoriesProgramVO;
 import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.CurrentProgramVO;
 import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.MainScreenVO;
+import xyz.zisarkaynar.poc_simplehabitmeditation.delegates.SHMdelegate;
 import xyz.zisarkaynar.poc_simplehabitmeditation.viewholders.BaseViewHolder;
 import xyz.zisarkaynar.poc_simplehabitmeditation.viewholders.CategoryViewHolder;
 import xyz.zisarkaynar.poc_simplehabitmeditation.viewholders.CurrentProgramViewHolder;
@@ -22,8 +23,11 @@ public class MeditateScreenAdapter extends BaseRecyclerAdapter<BaseViewHolder, M
     private static final int CATEGORIES_PROGRAM = 2;
     private static final int ALL_TOPIC = 3;
 
-    public MeditateScreenAdapter(Context context) {
+    private SHMdelegate mdelegate;
+
+    public MeditateScreenAdapter(Context context, SHMdelegate shMdelegate) {
         super(context);
+        mdelegate = shMdelegate;
     }
 
     @NonNull
@@ -31,13 +35,13 @@ public class MeditateScreenAdapter extends BaseRecyclerAdapter<BaseViewHolder, M
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == CURRENT_PROGRAM) {
             View view = mLayoutInflator.inflate(R.layout.item_view_current_program, parent, false);
-            return new CurrentProgramViewHolder(view);
+            return new CurrentProgramViewHolder(view, mdelegate);
         } else if (viewType == CATEGORIES_PROGRAM) {
             View view = mLayoutInflator.inflate(R.layout.item_view_category, parent, false);
             return new CategoryViewHolder(view);
         } else {
             View view = mLayoutInflator.inflate(R.layout.item_view_topics, parent, false);
-            return new TopicsViewHolder(view);
+            return new TopicsViewHolder(view, mdelegate);
         }
     }
 

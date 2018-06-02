@@ -13,7 +13,6 @@ import xyz.zisarkaynar.poc_simplehabitmeditation.viewholders.TopicsViewHolder;
 
 public class ProgramsAdapter extends BaseRecyclerAdapter<ProgramsViewHolder, ProgramVO> {
 
-
     public ProgramsAdapter(Context context) {
         super(context);
     }

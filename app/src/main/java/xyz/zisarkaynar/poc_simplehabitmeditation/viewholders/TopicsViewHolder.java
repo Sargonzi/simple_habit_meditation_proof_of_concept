@@ -7,6 +7,7 @@ import butterknife.BindView;
 import xyz.zisarkaynar.poc_simplehabitmeditation.R;
 import xyz.zisarkaynar.poc_simplehabitmeditation.adapters.MeditateScreenAdapter;
 import xyz.zisarkaynar.poc_simplehabitmeditation.data.vo.TopicVO;
+import xyz.zisarkaynar.poc_simplehabitmeditation.delegates.SHMdelegate;
 
 public class TopicsViewHolder extends BaseViewHolder<TopicVO, MeditateScreenAdapter> {
 
@@ -15,8 +16,11 @@ public class TopicsViewHolder extends BaseViewHolder<TopicVO, MeditateScreenAdap
     @BindView(R.id.tv_desc)
     TextView tvDesc;
 
-    public TopicsViewHolder(View itemView) {
+    private SHMdelegate mdelegate;
+
+    public TopicsViewHolder(View itemView, SHMdelegate shMdelegate) {
         super(itemView);
+        mdelegate = shMdelegate;
     }
 
     @Override
@@ -28,6 +32,6 @@ public class TopicsViewHolder extends BaseViewHolder<TopicVO, MeditateScreenAdap
 
     @Override
     public void onClick(View view) {
-
+        mdelegate.onTapItemView(mData);
     }
 }

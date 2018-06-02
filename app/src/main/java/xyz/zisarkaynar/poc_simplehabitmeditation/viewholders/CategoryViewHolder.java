@@ -25,9 +25,7 @@ public class CategoryViewHolder extends BaseViewHolder<CategoriesProgramVO, Medi
         super(itemView);
         mProgramsAdapter = new ProgramsAdapter(itemView.getContext());
         rvProgram.setLayoutManager(new LinearLayoutManager(itemView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-
         rvProgram.setAdapter(mProgramsAdapter);
-
     }
 
     @Override
